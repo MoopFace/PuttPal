@@ -1,0 +1,36 @@
+# sudo apt update
+# sudo apt install python3-jetson-gpio
+# just in case ;}
+
+import Jetson.GPIO as GPIO
+import time
+
+#pins
+led_pin = 7  # LED, GPIO 9 ? maybe ? idfk
+button_pin = 15  # button, GPIO 12
+
+#pin setup
+GPIO.setmode(GPIO.BOARD)  # use physical pin numbering instead of GPIO numbering, it's easier
+GPIO.setup(led_pin, GPIO.OUT)  # led pin set as output
+GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # button pin set as input with pull-up resistor
+
+print("press the button to toggle the LED. press control c to exit. or don't. i don't care. stop asking me things. GET OUT OF MY HOME!\n")
+
+try:
+    while True:
+        # read the button state
+        button_state = GPIO.input(button_pin)
+
+        if button_state == GPIO.LOW:  # button is pressed
+            GPIO.output(led_pin, GPIO.HIGH)  # turn LED ON
+        else:
+            GPIO.output(led_pin, GPIO.LOW)  # turn LED OFF
+
+        time.sleep(0.1)  # small delay to debounce the button
+
+except KeyboardInterrupt:
+    print("\nexiting")
+
+finally:
+    GPIO.cleanup()  # clean up all GPIO pins
+    
