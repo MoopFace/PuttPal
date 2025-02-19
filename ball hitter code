@@ -1,0 +1,56 @@
+import Jetson.GPIO as GPIO
+import time
+
+AIN1 = 15
+AIN2 = 32
+PWM_FREQ = 1000
+maxSize = 1000 #idk yet, this is the size of the box when the ball is as close as possible
+minSize = 1 # same thing, but for as far as possible
+
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(AIN1, GPIO.OUT)
+GPIO.setup(AIN2, GPIO.OUT)
+
+pwm = GPIO.PWM(AIN1, PWM_FREQ) #controls speed
+pwm.start(0)
+
+GPIO.output(AIN2, GPIO.LOW) #controls direction, high is backwards
+
+def hitThatHoe(ballSize):
+    hitPW = ((maxSize - ballSize) * 100)/(maxSize - minSize)  #percentage of size
+    if (hitPW < 20): #min PWM is 20
+        hitPW = 20
+    pwm.ChangeDutyCycle(hitPW) #go forward 
+    time.sleep(1)
+    pwm.ChangeDutyCycle(0) #stop
+    GPIO.output(AIN2, GPIO.HIGH) #turn around
+    pwm.ChangeDutyCycle(hitPW) #go backwards
+    time.sleep(1)
+    pwm.ChangeDutyCycle(0) #stop again
+    GPIO.output(AIN2, GPIO.LOW) #setup to go back forward
+    print("done :p")
+
+try:
+    while True:
+        ballSize = int(input("enter the ball size: ")) #placeholder to test function
+        print(f"the ball size is {ballSize}")
+        hitThatHoe(ballSize)
+except KeyboardInterrupt:
+    print("    all done")
+
+finally:
+    try:
+        pwm.stop()
+    except Exception as e:
+        print(f"Error stopping PWM: {e}")
+        time.sleep(0.1)
+        GPIO.cleanup()
+
+'''
+VM + SLP -> 5V (2 or exterior)
+GND -> GND (6 or exterior, idgaf)
+AIN1 -> PWM 1 (15)
+AIN2 -> GPIO 7 (32)
+AOUT1 -> MOTOR +
+AOUT2 -> MOTOR -
+'''
