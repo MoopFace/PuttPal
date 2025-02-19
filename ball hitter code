@@ -14,20 +14,23 @@ GPIO.setup(AIN2, GPIO.OUT)
 pwm = GPIO.PWM(AIN1, PWM_FREQ) #controls speed
 pwm.start(0)
 
-GPIO.output(AIN2, GPIO.LOW) #controls direction, high is backwards
+GPIO.output(AIN2, GPIO.HIGH) #controls direction, high is backwards
 
 def hitThatHoe(ballSize):
     hitPW = ((maxSize - ballSize) * 100)/(maxSize - minSize)  #percentage of size
     if (hitPW < 20): #min PWM is 20
         hitPW = 20
-    pwm.ChangeDutyCycle(hitPW) #go forward 
-    time.sleep(1)
+    pwm.ChangeDutyCycle(hitPW) #go backward
+    time.sleep(0.5)
+    pwm.ChangeDuty(0)
+    GPIO.output(AIN2, GPIO.LOW)
+    pwm.ChangeDutyCycle(hitPW)
+    time.sleep(1.5)
     pwm.ChangeDutyCycle(0) #stop
     GPIO.output(AIN2, GPIO.HIGH) #turn around
     pwm.ChangeDutyCycle(hitPW) #go backwards
     time.sleep(1)
     pwm.ChangeDutyCycle(0) #stop again
-    GPIO.output(AIN2, GPIO.LOW) #setup to go back forward
     print("done :p")
 
 try:
