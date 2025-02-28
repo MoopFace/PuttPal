@@ -35,6 +35,10 @@ speed = 0.85
 turntime = 0.1 #0.05 works
 movetime = 0.1
 delay = 0
+
+nextTime = 0
+
+
 def set_forward():
     M[1] += speed
     M[2] += speed
@@ -95,6 +99,14 @@ def move():
     kit.motor3.throttle=norm(-M[3])
     kit.motor4.throttle=norm(M[4])
 
+#def timeMilis():
+#    return (time.time() * 1000)
+
+#def timeYet(deltaSeconds):
+#    return (time.time() - deltaSeconds) > lastTime
+
+
+
 # Load YOLOv11 model for golf ball detection
 model = YOLO('/home/jetson/PuttPal/best.pt', task="detect") # Change the path to the best.pt file
 
@@ -122,6 +134,10 @@ while cap.isOpened():
 
     # Annotate detections on the frame
     for result in results:
+        if result.boxes is None:
+            #no ball detected
+            #just turn in a circle
+
         if result.boxes is not None:
 
             maxconf = 0
@@ -143,35 +159,41 @@ while cap.isOpened():
                 center = screen_width/2
                 error = xavg - center
                 zone_width = 50
+                
+                toWait = (turntime/center) * abs(error)
+
+                moving = False
 
                 if (box.conf[0] == maxconf):
                     if (int(box.cls[0]) == 0):
-                        if (error > zone_width):
-                            print("ball found: turn right")
-                            #turn right
-                            set_right()
-                            move()
-                            time.sleep((turntime/center) * abs(error))
-                            set_stop()
-                            move()
-                            time.sleep(delay)
-                        elif (error < -zone_width):
-                            print("ball found: turn left")
-                            #turn left
-                            set_left()
-                            move()
-                            time.sleep((turntime/center) * abs(error))
-                            set_stop()
-                            move()
-                            time.sleep(delay)
-                        elif (-zone_width < error < zone_width):
-                            #go forwards
-                            set_forward()
-                            move()
-                            time.sleep(movetime)
-                            set_stop()
-                            move()
-                            time.sleep(delay)
+                        if (time.time() > nextTime):
+                            if (moving == True):
+                                set_stop()
+                                move()
+                                moving = False
+
+                            if (error > zone_width):
+                                print("ball found: turn right")
+                                #turn right
+                                set_right()
+                                move()
+                                nextTime = time.time() + (turntime/center) * abs(error) 
+                                moving = True
+
+                            elif (error < -zone_width):
+                                print("ball found: turn left")
+                                #turn left
+                                set_left()
+                                move()
+                                nextTime = time.time() + (turntime/center) * abs(error) 
+                                moving = True
+
+                            elif (-zone_width < error < zone_width):
+                                #go forwards
+                                set_forward()
+                                move()
+                                nextTime = time.time() + movetime
+                                moving = True
 
                 # Draw bounding box and label
                 cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
