@@ -186,7 +186,7 @@ while cap.isOpened():
                                 set_right()
                                 move()
                                 nextTime = time.time() + (turntime) * abs(error) 
-                                print "next time is", nextTime
+                                print("next time is{0}", nextTime)
                                 moving = True
                             
 
@@ -196,7 +196,7 @@ while cap.isOpened():
                                 set_left()
                                 move()
                                 nextTime = time.time() + (turntime) * abs(error) 
-                                print "next time is", nextTime
+                                print("next time is{0}", nextTime)
                                 moving = True
                                 
 
@@ -205,7 +205,7 @@ while cap.isOpened():
                                 set_forward()
                                 move()
                                 nextTime = time.time() + movetime
-                                print "next time is", nextTime
+                                print("next time is{0}", nextTime)
                                 moving = True
                                 print("going forwards")
 
