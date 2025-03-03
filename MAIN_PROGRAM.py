@@ -118,11 +118,12 @@ cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 600)
 # Initialize FPS tracking
 prev_time = time.time()
 
+
+#movement code
 set_stop()
 move()
-
-
-
+nextTime = 0
+moving = 0
 
 while cap.isOpened():
     success, frame = cap.read()
@@ -137,6 +138,18 @@ while cap.isOpened():
 
     # Perform detection
     results = model.predict(source=frame, conf=0.5, iou=0.5)
+
+    #stop moving if there is nothing and enough time has passed
+    if(time.time() > nextTime):
+        if (moving == 1):
+            set_stop()
+            move()
+            moving = 0
+            print("stopped moving")
+
+
+
+
 
     # Annotate detections on the frame
     for result in results:
@@ -168,17 +181,7 @@ while cap.isOpened():
                 zone_width = 75
                 
                 toWait = (turntime/center) * abs(error)
-
-                nextTime = 0
-                moving = 0
         
-                if(time.time() > nextTime):
-                    if (moving == 1):
-                        set_stop()
-                        move()
-                        moving = 0
-                        print("stopped moving")
-
 
                 if (box.conf[0] == maxconf):
                     if (int(box.cls[0]) == 0):
