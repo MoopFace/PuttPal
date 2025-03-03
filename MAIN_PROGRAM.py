@@ -118,6 +118,12 @@ cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 600)
 # Initialize FPS tracking
 prev_time = time.time()
 
+set_stop()
+move()
+
+
+
+
 while cap.isOpened():
     success, frame = cap.read()
     if not success:
@@ -159,7 +165,7 @@ while cap.isOpened():
                 screen_width = 800
                 center = screen_width/2
                 error = xavg - center
-                zone_width = 50
+                zone_width = 75
                 
                 toWait = (turntime/center) * abs(error)
 
