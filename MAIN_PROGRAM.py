@@ -174,11 +174,11 @@ while cap.isOpened():
                 if (box.conf[0] == maxconf):
                     if (int(box.cls[0]) == 0):
                         if (time.time() > nextTime):
-                            if (moving == 1):
-                                set_stop()
-                                move()
-                                moving = 0
-                                print("stopped moving")
+                            #if (moving == 1):
+                            set_stop()
+                            move()
+                            moving = 0
+                            print("stopped moving")
                         
                             if (error > zone_width):
                                 print ("ball found: turn right")
@@ -186,8 +186,8 @@ while cap.isOpened():
                                 set_right()
                                 move()
                                 nextTime = time.time() + (turntime) * abs(error) 
-                                print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
                                 moving = 1
+                                print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
                             
 
                             elif (error < -zone_width):
@@ -196,8 +196,8 @@ while cap.isOpened():
                                 set_left()
                                 move()
                                 nextTime = time.time() + (turntime) * abs(error) 
-                                print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
                                 moving = 1
+                                print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
                                 
 
                             elif (-zone_width < error < zone_width):
@@ -205,8 +205,8 @@ while cap.isOpened():
                                 set_forward()
                                 move()
                                 nextTime = time.time() + movetime
-                                print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
                                 moving = 1
+                                print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
                                 print("going forwards")
 
                 # Draw bounding box and label
