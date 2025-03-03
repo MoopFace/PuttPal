@@ -169,6 +169,7 @@ while cap.isOpened():
                 
                 toWait = (turntime/center) * abs(error)
 
+                nextTime = 0
                 moving = 0
 
                 if (box.conf[0] == maxconf):
@@ -208,6 +209,10 @@ while cap.isOpened():
                                 moving = 1
                                 print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
                                 print("going forwards")
+                        else:
+                            print("not enough time has passed")
+                            print("current time=", time.time(), " nextTime=", nextTime)
+
 
                 # Draw bounding box and label
                 cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
