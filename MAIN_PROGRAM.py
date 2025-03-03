@@ -178,22 +178,25 @@ while cap.isOpened():
                                 set_stop()
                                 move()
                                 moving = False
-
+                                print("stopped moving")
+                        
                             if (error > zone_width):
                                 print("ball found: turn right")
                                 #turn right
                                 set_right()
                                 move()
-                                nextTime = time.time() + (turntime/center) * abs(error) 
+                                nextTime = time.time() + (turntime) * abs(error) 
                                 moving = True
+                                print("turning right")
 
                             elif (error < -zone_width):
                                 print("ball found: turn left")
                                 #turn left
                                 set_left()
                                 move()
-                                nextTime = time.time() + (turntime/center) * abs(error) 
+                                nextTime = time.time() + (turntime) * abs(error) 
                                 moving = True
+                                print("turning left")
 
                             elif (-zone_width < error < zone_width):
                                 #go forwards
@@ -201,6 +204,7 @@ while cap.isOpened():
                                 move()
                                 nextTime = time.time() + movetime
                                 moving = True
+                                print("going forwards")
 
                 # Draw bounding box and label
                 cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
