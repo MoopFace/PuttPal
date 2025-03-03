@@ -174,7 +174,7 @@ while cap.isOpened():
                 if (box.conf[0] == maxconf):
                     if (int(box.cls[0]) == 0):
                         if (time.time() > nextTime):
-                            if (moving == True):
+                            if (moving):
                                 set_stop()
                                 move()
                                 moving = False
@@ -186,7 +186,7 @@ while cap.isOpened():
                                 set_right()
                                 move()
                                 nextTime = time.time() + (turntime) * abs(error) 
-                                print("next time is{0}, movetime is {1}", nextTime, movetime)
+                                print("next time is ", nextTime, " movetime is", movetime)
                                 moving = True
                             
 
@@ -196,7 +196,7 @@ while cap.isOpened():
                                 set_left()
                                 move()
                                 nextTime = time.time() + (turntime) * abs(error) 
-                                print("next time is{0}, movetime is {1}", nextTime, movetime)
+                                print("next time is ", nextTime, " movetime is", movetime)
                                 moving = True
                                 
 
@@ -205,7 +205,7 @@ while cap.isOpened():
                                 set_forward()
                                 move()
                                 nextTime = time.time() + movetime
-                                print("next time is{0}, movetime is {1}", nextTime, movetime)
+                                print("next time is ", nextTime, " movetime is", movetime)
                                 moving = True
                                 print("going forwards")
 
