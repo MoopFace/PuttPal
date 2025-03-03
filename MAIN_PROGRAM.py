@@ -171,15 +171,19 @@ while cap.isOpened():
 
                 nextTime = 0
                 moving = 0
+        
+                if(time.time() > nextTime):
+                    if (moving == 1):
+                        set_stop()
+                        move()
+                        moving = 0
+                        print("stopped moving")
+
 
                 if (box.conf[0] == maxconf):
                     if (int(box.cls[0]) == 0):
                         if (time.time() > nextTime):
-                            #if (moving == 1):
-                            set_stop()
-                            move()
-                            moving = 0
-                            print("stopped moving")
+
                         
                             if (error > zone_width):
                                 print ("ball found: turn right")
