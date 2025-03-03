@@ -186,8 +186,9 @@ while cap.isOpened():
                                 set_right()
                                 move()
                                 nextTime = time.time() + (turntime) * abs(error) 
+                                print("next time is" + nextTime)
                                 moving = True
-                                print("turning right")
+                            
 
                             elif (error < -zone_width):
                                 print("ball found: turn left")
@@ -195,14 +196,16 @@ while cap.isOpened():
                                 set_left()
                                 move()
                                 nextTime = time.time() + (turntime) * abs(error) 
+                                print("next time is" + nextTime)
                                 moving = True
-                                print("turning left")
+                                
 
                             elif (-zone_width < error < zone_width):
                                 #go forwards
                                 set_forward()
                                 move()
                                 nextTime = time.time() + movetime
+                                print("next time is" + nextTime)
                                 moving = True
                                 print("going forwards")
 
