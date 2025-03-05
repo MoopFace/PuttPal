@@ -34,6 +34,7 @@ M = [0, 0, 0, 0, 0]
 speed = 0.85
 turntime = 0.05 #0.05 works
 movetime = 0.1
+searchTime = 0.15
 delay = 0
 
 nextTime = 0
@@ -149,8 +150,13 @@ while cap.isOpened():
 
     # Annotate detections on the frame
     for result in results:
-#        if result.boxes is None:
-#            print("nothing detected")
+        if result.boxes is None:
+            print("nothing detected")
+            #look for ball
+            set_left()
+            move()
+            nextTime = searchTime
+            moving = 1
             #no ball detected
             #just turn in a circle
 
