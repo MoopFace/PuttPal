@@ -147,10 +147,8 @@ while cap.isOpened():
             move()
             moving = 0
 #            print("stopped moving")
-
-    # Annotate detections on the frame
-    for result in results:
-        if result.boxes is None:
+    
+    if result is None:
             print("nothing detected")
             #look for ball
             set_left()
@@ -160,6 +158,11 @@ while cap.isOpened():
             #no ball detected
             #just turn in a circle
 
+
+
+    # Annotate detections on the frame
+    for result in results:
+        
         if result.boxes is not None:
 
             maxconf = 0
