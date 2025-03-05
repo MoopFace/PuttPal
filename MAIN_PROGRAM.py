@@ -148,7 +148,7 @@ while cap.isOpened():
             moving = 0
 #            print("stopped moving")
     
-    if results is None:
+    if 'results' in Locals():
             print("nothing detected")
             #look for ball
             set_left()
