@@ -145,12 +145,12 @@ while cap.isOpened():
             set_stop()
             move()
             moving = 0
-            print("stopped moving")
+#            print("stopped moving")
 
     # Annotate detections on the frame
     for result in results:
         if result.boxes is None:
-            print("nothing detected")
+#            print("nothing detected")
             #no ball detected
             #just turn in a circle
 
@@ -185,23 +185,23 @@ while cap.isOpened():
 
                         
                             if (error > zone_width):
-                                print ("ball found: turn right")
+#                                print ("ball found: turn right")
                                 #turn right
                                 set_right()
                                 move()
                                 nextTime = time.time() + (turntime/center) * abs(error) * 0.5 
                                 moving = 1
-                                print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
+#                                print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
                             
 
                             elif (error < -zone_width):
-                                print("ball found: turn left")
+#                                print("ball found: turn left")
                                 #turn left
                                 set_left()
                                 move()
                                 nextTime = time.time() + (turntime/center) * abs(error) * 0.5 
                                 moving = 1
-                                print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
+#                                print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
                                 
 
                             elif (-zone_width < error < zone_width):
@@ -210,8 +210,8 @@ while cap.isOpened():
                                 move()
                                 nextTime = time.time() + movetime
                                 moving = 1
-                                print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
-                                print("going forwards")
+#                                print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
+#                                print("going forwards")
                         else:
                             print("not enough time has passed")
                             print("current time=", time.time(), " nextTime=", nextTime)
