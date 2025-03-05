@@ -147,16 +147,17 @@ while cap.isOpened():
             move()
             moving = 0
 #            print("stopped moving")
-    
-    if 'results' not in locals():
-            print("nothing detected")
-            #look for ball
-            set_left()
-            move()
-            nextTime = searchTime
-            moving = 1
-            #no ball detected
-            #just turn in a circle
+   
+    print(len(results))
+ #   if 'results' not in locals():
+ #           print("nothing detected")
+ #           #look for ball
+ #           set_left()
+ #           move()
+ #           nextTime = searchTime
+ #           moving = 1
+ #           #no ball detected
+ #           #just turn in a circle
 
 
 
