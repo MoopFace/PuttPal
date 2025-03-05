@@ -163,7 +163,9 @@ while cap.isOpened():
 
     # Annotate detections on the frame
     for result in results:
-        
+        if result.boxes is None:
+            print("THER IS NOETINGNINGIGNG")
+
         if result.boxes is not None:
 
             maxconf = 0
