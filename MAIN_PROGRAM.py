@@ -32,7 +32,7 @@ kit = MotorKit(i2c=board.I2C())
 
 M = [0, 0, 0, 0, 0]
 speed = 0.85
-turntime = 0.1 #0.05 works
+turntime = 0.05 #0.05 works
 movetime = 0.1
 delay = 0
 
