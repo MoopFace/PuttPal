@@ -148,7 +148,7 @@ while cap.isOpened():
             moving = 0
 #            print("stopped moving")
    
-    print(len(results))
+    print(len(results.boxes))
  #   if 'results' not in locals():
  #           print("nothing detected")
  #           #look for ball
