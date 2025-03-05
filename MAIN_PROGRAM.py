@@ -230,7 +230,7 @@ while cap.isOpened():
     cv2.putText(frame, f"FPS: {int(fps)}", (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
 
     # Show the annotated frame
-    cv2.imshow("Golf Ball Detection", frame)
+#    cv2.imshow("Golf Ball Detection", frame)
 
     # Break on 'q' or 'ESC' key press
     if cv2.waitKey(1) & 0xFF in [27, ord('q')]:
