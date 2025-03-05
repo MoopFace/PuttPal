@@ -176,7 +176,7 @@ while cap.isOpened():
                 error = xavg - center
                 zone_width = 25
                 
-                toWait = (turntime) * abs(error)
+                toWait = (turntime/center) * abs(error)
         
 
                 if (box.conf[0] == maxconf):
