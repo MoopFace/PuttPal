@@ -119,7 +119,7 @@ cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 600)
 prev_time = time.time()
 
 
-#movement code
+#stop moving when program starts
 set_stop()
 move()
 nextTime = 0
@@ -174,7 +174,7 @@ while cap.isOpened():
                 screen_width = 800
                 center = screen_width/2
                 error = xavg - center
-                zone_width = 75
+                zone_width = 25
                 
                 #toWait = (turntime/center) * abs(error)
         
