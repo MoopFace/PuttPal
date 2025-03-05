@@ -149,7 +149,7 @@ while cap.isOpened():
 
     # Annotate detections on the frame
     for result in results:
-        if result.boxes is None:
+#        if result.boxes is None:
 #            print("nothing detected")
             #no ball detected
             #just turn in a circle
