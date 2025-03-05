@@ -176,7 +176,7 @@ while cap.isOpened():
                 error = xavg - center
                 zone_width = 25
                 
-                #toWait = (turntime/center) * abs(error)
+                toWait = (turntime) * abs(error)
         
 
                 if (box.conf[0] == maxconf):
@@ -189,7 +189,7 @@ while cap.isOpened():
                                 #turn right
                                 set_right()
                                 move()
-                                nextTime = time.time() + (turntime/center) * abs(error) * 0.5 
+                                nextTime = time.time() + toWait
                                 moving = 1
 #                                print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
                             
@@ -199,7 +199,7 @@ while cap.isOpened():
                                 #turn left
                                 set_left()
                                 move()
-                                nextTime = time.time() + (turntime/center) * abs(error) * 0.5 
+                                nextTime = time.time() + toWait
                                 moving = 1
 #                                print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
                                 
