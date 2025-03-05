@@ -163,7 +163,7 @@ while cap.isOpened():
 
     # Annotate detections on the frame
     for result in results:
-        if result.boxes is None:
+        if (len(result.boxes) = 0):
             print("THER IS NOETINGNINGIGNG")
 
         if result.boxes is not None:
