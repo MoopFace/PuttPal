@@ -148,7 +148,7 @@ while cap.isOpened():
             moving = 0
 #            print("stopped moving")
    
-    print(len(results[0].boxes))
+ #   print(len(results[0].boxes))
  #   if 'results' not in locals():
  #           print("nothing detected")
  #           #look for ball
@@ -163,8 +163,12 @@ while cap.isOpened():
 
     # Annotate detections on the frame
     for result in results:
-        if (len(result.boxes) = 0):
-            print("THER IS NOETINGNINGIGNG")
+        if (len(result.boxes) == 0):
+            print("nothing detected, turning left")
+            set_left()
+            move()
+            moving = 1
+            nextTime = searchTime
 
         if result.boxes is not None:
 
