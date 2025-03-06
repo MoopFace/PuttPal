@@ -18,3 +18,20 @@ pwm.start(0)
 
 GPIO.output(AIN2, GPIO.LOW)
 
+
+try:
+    while True:
+        pwm.ChangeDutyCycle(80)
+        time.sleep(3)
+        pwm.ChangeDutyCycle(0)
+except KeyboardInterrupt:
+    print("    all done")
+
+finally:
+    try:
+        pwm.stop()
+    except Exception as e:
+        print(f"Error stopping PWM: {e}")
+        time.sleep(0.1)
+        GPIO.cleanup()
+
