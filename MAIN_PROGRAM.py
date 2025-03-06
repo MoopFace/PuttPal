@@ -260,7 +260,7 @@ while cap.isOpened():
                             elif (-zone_width < x_error < zone_width):
                                 # if the ball is centered
                                 
-                                if (yavg < y_set_point)
+                                if (yavg < y_set_point):
                                     #go forwards
                                     set_forward()
                                     move()
