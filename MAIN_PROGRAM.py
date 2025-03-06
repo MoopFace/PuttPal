@@ -1,12 +1,22 @@
 import cv2
 from ultralytics import YOLO
 import time
+import board
+import Jetson.GPIO
+
+
+#800 by 450
+
 
 #import curses
-import board
+#import board
 #import digitalio
 #import busio
 #print("BUSSSSS")
+#import Jetson.GPIO as GPIO
+
+
+
 
 from adafruit_motorkit import MotorKit
 #i2c_bus = busio.I2C(board.SCL_1, board.SDA_1)
@@ -30,12 +40,38 @@ kit = MotorKit(i2c=board.I2C())
 #    kit.motor4.throttle=0.5
 
 
+#init ball hitter
+AIN1 = 15
+AIN2 = 32
+PWM_FREQ = 50
+
+MAX_SIZE = 1000
+MIN_SIZE = 1
+
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(AIN1, GPIO.OUT)
+GPIO.setup(AIN2, GPIO.OUT)
+
+pwm = GPIO.PWM(AIN1, PWM_FREQ)
+pwm.start(0)
+
+GPIO.output(AIN2, GPIO.LOW)
+
+
+
+
+
+
 M = [0, 0, 0, 0, 0]
 speed = 0.85
 turntime = 0.05 #0.05 works
 movetime = 0.1
 searchTime = 0.15
 delay = 0
+dutyCycle = 60
+hittingTime = 3
+strafeLeftTime = 1
+strafeForwardTime = 1
 
 nextTime = 0
 
@@ -77,8 +113,6 @@ def set_strafe_left():
     M[2] += speed
     M[3] += -speed
     M[4] += speed
-
-
 
 def set_stop():
     M[1] = 0
@@ -188,11 +222,14 @@ while cap.isOpened():
                 xavg = (x1 + x2) / 2
                 yavg = (y1 + y2) / 2
                 screen_width = 800
+                screen_height = 450
                 center = screen_width/2
-                error = xavg - center
+                x_error = xavg - center
+                y_error = yavg - (screen_height/2)
+                y_set_point = 
                 zone_width = 25
                 
-                toWait = (turntime/center) * abs(error)
+                toWait = (turntime/center) * abs(x_error)
         
 
                 if (box.conf[0] == maxconf):
@@ -200,7 +237,7 @@ while cap.isOpened():
                         if (time.time() > nextTime):
 
                         
-                            if (error > zone_width):
+                            if (x_error > zone_width):
 #                                print ("ball found: turn right")
                                 #turn right
                                 set_right()
@@ -210,7 +247,7 @@ while cap.isOpened():
 #                                print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
                             
 
-                            elif (error < -zone_width):
+                            elif (x_error < -zone_width):
 #                                print("ball found: turn left")
                                 #turn left
                                 set_left()
@@ -220,14 +257,31 @@ while cap.isOpened():
 #                                print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
                                 
 
-                            elif (-zone_width < error < zone_width):
-                                #go forwards
-                                set_forward()
-                                move()
-                                nextTime = time.time() + movetime
-                                moving = 1
-#                                print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
-#                                print("going forwards")
+                            elif (-zone_width < x_error < zone_width):
+                                # if the ball is centered
+                                
+                                if (yavg < y_set_point)
+                                    #go forwards
+                                    set_forward()
+                                    move()
+                                    nextTime = time.time() + movetime
+                                    moving = 1
+#                                    print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
+                                else:
+                                    set_strafe_left()
+                                    move()
+                                    time.sleep(strafeLeftTime)
+                                    set_stop()
+                                    move()
+                                    pwm.ChangeDutyCycle(dutyCycle)
+                                    set_forward()
+                                    move()
+                                    time.sleep(hittingTime)
+                                    set_stop()
+                                    move()
+                                    pwm.ChangeDutyCycle(0)
+
+
                         else:
                             print("not enough time has passed")
                             print("current time=", time.time(), " nextTime=", nextTime)
