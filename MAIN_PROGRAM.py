@@ -226,7 +226,7 @@ while cap.isOpened():
                 center = screen_width/2
                 x_error = xavg - center
                 y_error = yavg - (screen_height/2)
-                y_set_point = 
+                y_set_point = screen_height * 0.9 
                 zone_width = 25
                 
                 toWait = (turntime/center) * abs(x_error)
