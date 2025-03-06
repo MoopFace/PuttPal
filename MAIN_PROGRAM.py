@@ -42,7 +42,7 @@ kit = MotorKit(i2c=board.I2C())
 
 #init ball hitter
 AIN1 = 15
-AIN2 = 32
+AIN2 = 33
 PWM_FREQ = 50
 
 MAX_SIZE = 1000
