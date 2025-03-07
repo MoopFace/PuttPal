@@ -1,6 +1,6 @@
 import time
 import Jetson.GPIO as GPIO
-from adafruit_motorkit import Motorkit
+from adafruit_motorkit import MotorKit
 
 
 #setup motorkit
