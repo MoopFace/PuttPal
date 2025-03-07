@@ -19,7 +19,7 @@ if (NEW_HIT):
     directionPin.direction = digitalio.Direction.OUTPUT 
     directionPin.value = False
     
-    pwm = pwmio.PWMOut(board.D7, frequency=PWM_FREQ, duty_cycle=0)
+    pwm = pwmio.PWMOut(board.D12, frequency=PWM_FREQ, duty_cycle=0)
 
 
 
