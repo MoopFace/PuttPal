@@ -2,7 +2,7 @@
 import time
 import cv2
 from ultralytics import YOLO
-import funcs
+import funcs as f
 
 
 
@@ -60,8 +60,8 @@ prev_time = time.time()
 
 
 #stop moving when program starts
-funcs.set_stop()
-funcs.move()
+f.set_stop()
+f.move()
 nextTime = 0
 moving = 0
 
@@ -82,8 +82,8 @@ while cap.isOpened():
     #stop moving if there is nothing and enough time has passed
     if(time.time() > nextTime):
         if (moving == 1):
-            set_stop()
-            move()
+            f.set_stop()
+            f.move()
             moving = 0
 #            print("stopped moving")
    
@@ -105,8 +105,8 @@ while cap.isOpened():
         if (len(result.boxes) == 0):
             print("nothing detected, turning left")
             time.sleep(stareTime)
-            set_left()
-            move()
+            f.set_left()
+            f.move()
             moving = 1
             nextTime = searchTime
 
@@ -146,8 +146,8 @@ while cap.isOpened():
                             if (x_error > zone_width):
 #                                print ("ball found: turn right")
                                 #turn right
-                                set_right()
-                                move()
+                                f.set_right()
+                                f.move()
                                 nextTime = time.time() + toWait
                                 moving = 1
 #                                print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
@@ -156,8 +156,8 @@ while cap.isOpened():
                             elif (x_error < -zone_width):
 #                                print("ball found: turn left")
                                 #turn left
-                                set_left()
-                                move()
+                                f.set_left()
+                                f.move()
                                 nextTime = time.time() + toWait
                                 moving = 1
 #                                print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
@@ -168,13 +168,13 @@ while cap.isOpened():
                                 
                                 if (yavg < y_set_point):
                                     #go forwards
-                                    set_forward()
-                                    move()
+                                    f.set_forward()
+                                    f.move()
                                     nextTime = time.time() + movetime
                                     moving = 1
 #                                    print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
                                 else:
-                                    hit_sequence()
+                                    f.hit_sequence()
 
                         else:
                             print("not enough time has passed")
