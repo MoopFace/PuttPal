@@ -222,10 +222,10 @@ while cap.isOpened():
     for result in results:
         if (len(result.boxes) == 0):
             print("nothing detected, turning left")
+            time.sleep(stareTime)
             set_left()
             move()
             moving = 1
-            time.sleep(stareTime)
             nextTime = searchTime
 
         if result.boxes is not None:
