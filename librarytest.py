@@ -6,10 +6,11 @@ import pwmio
 import digitalio
 
 
-OLD_HIT = True
+OLD_HIT = False
 NEW_HIT = True
 
 if (NEW_HIT):
+    print("new hit setup")
     AIN1 = 32
     AIN2 = 33
     PWM_FREQ = 50
@@ -53,6 +54,7 @@ time.sleep(2)
 kit.motor1.throttle=(0)
 
 if (NEW_HIT):
+    print("new hit hitting")
     pwm.duty_cycle = 80
     time.sleep(2)
     pwm.duty_cycle = 0
