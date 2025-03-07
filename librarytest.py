@@ -15,7 +15,7 @@ if (NEW_HIT):
     AIN2 = 33
     PWM_FREQ = 50
     
-    directionPin = digitalio.DigitalInOut(board.D33) #should be pin 33 or D13
+    directionPin = digitalio.DigitalInOut(board.D13) #should be pin 33 or D13
     
     directionPin.value = False
     
