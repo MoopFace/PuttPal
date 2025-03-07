@@ -5,6 +5,9 @@ import board
 
 HIT = True
 
+#setup motorkit
+kit = MotorKit(i2c=board.I2C())
+
 
 
 if (HIT): 
@@ -26,9 +29,6 @@ if (HIT):
 
 
     GPIO.output(AIN2, GPIO.LOW)
-
-#setup motorkit
-kit = MotorKit(i2c=board.I2C())
 
 
 
