@@ -3,24 +3,26 @@ import Jetson.GPIO as GPIO
 from adafruit_motorkit import MotorKit
 import board
 
+HIT = False
+
 #setup motorkit
 kit = MotorKit(i2c=board.I2C())
 
+if (HIT): 
+    #setup GPIO
+    AIN1 = 32
+    AIN2 = 33
+    PWM_FREQ = 50
 
-#setup GPIO
-AIN1 = 32
-AIN2 = 33
-PWM_FREQ = 50
+    MAX_SIZE = 1000
+    MAX_SIZE = 1
 
-MAX_SIZE = 1000
-MAX_SIZE = 1
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(AIN1, GPIO.OUT)
+    pwm = GPIO.PWM(AIN1, PWM_FREQ)
+    pwm.start(0)
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(AIN1, GPIO.OUT)
-pwm = GPIO.PWM(AIN1, PWM_FREQ)
-pwm.start(0)
-
-GPIO.output(AIN2, GPIO.LOW)
+    GPIO.output(AIN2, GPIO.LOW)
 
 
 
@@ -30,7 +32,9 @@ kit.motor1.throttle=(0.5)
 time.sleep(2)
 kit.motor1.throttle=(0)
 
-#hitter swing
-pwm.ChangeDutyCycle(60)
-time.sleep(1)
-pwm.ChangeDutyCycle(0)
+
+if (HIT):
+    #hitter swing
+    pwm.ChangeDutyCycle(60)
+    time.sleep(1)
+    pwm.ChangeDutyCycle(0)
