@@ -29,18 +29,18 @@ nextTime = 0
 
 def hit_sequence():
     print("HIT DA BALLS")
-    set_strafe_left()
-    move()
+    f.set_strafe_left(speed)
+    f.move()
     time.sleep(strafeLeftTime)
-    set_stop()
-    move()
+    f.set_stop(speed)
+    f.move()
     #pwm.ChangeDutyCycle(dutyCycle)
     pwm.duty_cycle = dutyCycle
-    set_forward()
-    move()
+    f.set_forward(speed
+    f.move()
     time.sleep(hittingTime)
-    set_stop()
-    move()
+    f.set_stop(speed)
+    f.move()
     #pwm.ChangeDutyCycle(0)
     pwm.duty_cycle = 0
  
@@ -105,7 +105,7 @@ while cap.isOpened():
         if (len(result.boxes) == 0):
             print("nothing detected, turning left")
             time.sleep(stareTime)
-            f.set_left()
+            f.set_left(speed)
             f.move()
             moving = 1
             nextTime = searchTime
@@ -146,7 +146,7 @@ while cap.isOpened():
                             if (x_error > zone_width):
 #                                print ("ball found: turn right")
                                 #turn right
-                                f.set_right()
+                                f.set_right(speed)
                                 f.move()
                                 nextTime = time.time() + toWait
                                 moving = 1
@@ -156,7 +156,7 @@ while cap.isOpened():
                             elif (x_error < -zone_width):
 #                                print("ball found: turn left")
                                 #turn left
-                                f.set_left()
+                                f.set_left(speed)
                                 f.move()
                                 nextTime = time.time() + toWait
                                 moving = 1
@@ -168,7 +168,7 @@ while cap.isOpened():
                                 
                                 if (yavg < y_set_point):
                                     #go forwards
-                                    f.set_forward()
+                                    f.set_forward(speed)
                                     f.move()
                                     nextTime = time.time() + movetime
                                     moving = 1
