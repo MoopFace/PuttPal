@@ -25,7 +25,7 @@ if (HIT):
     pwm = GPIO.PWM(AIN1, PWM_FREQ)
     pwm.start(0)
 
-    print(GPIO.getmode())
+    print("THE MODE IS ", GPIO.getmode())
 
     GPIO.output(AIN2, GPIO.LOW)
 
