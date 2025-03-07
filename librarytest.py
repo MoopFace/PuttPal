@@ -16,7 +16,7 @@ if (NEW_HIT):
     PWM_FREQ = 50
     
     directionPin = digitalio.DigitalInOut(board.D13) #should be pin 33 or D13
-    directionPin.Direction = digitalio.Direction.OUTPUT 
+    directionPin.direction = digitalio.Direction.OUTPUT 
     directionPin.value = False
     
     pwm = pwmio.PWMOut(board.D32, frequency=PWM_FREQ, duty_cycle=0)
