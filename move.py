@@ -15,6 +15,17 @@ time.sleep(1)
 f.set_stop()
 f.move()
 
+f.set_strafe_left(speed)
+f.move()
+time.sleep(1)
+f.set_stop()
+f.move()
+
+f.set_strafe_right(speed)
+f.move()
+time.sleep(1)
+f.set_stop()
+f.move()
 
 
 
