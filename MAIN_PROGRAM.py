@@ -8,8 +8,8 @@ import funcs as f
 
 #800 by 450
 
-kit = funcs.kit
-pwm = funcs.pwm
+kit = f.kit
+pwm = f.pwm
 
 
 
