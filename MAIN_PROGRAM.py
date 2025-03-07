@@ -2,8 +2,9 @@ import cv2
 from ultralytics import YOLO
 import time
 import board
-import Jetson.GPIO as GPIO
-
+#import Jetson.GPIO as GPIO
+import digitalio
+import pwmio
 
 #800 by 450
 
