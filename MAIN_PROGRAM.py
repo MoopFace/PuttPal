@@ -174,7 +174,7 @@ while cap.isOpened():
                                     moving = 1
 #                                    print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
                                 else:
-                                    f.hit_sequence()
+                                    hit_sequence()
 
                         else:
                             print("not enough time has passed")
