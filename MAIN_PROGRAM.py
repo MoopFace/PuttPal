@@ -78,6 +78,7 @@ speed = 0.85
 turntime = 0.05 #0.05 works
 movetime = 0.1
 searchTime = 0.15
+stareTime = 0.1
 delay = 0
 #dutyCycle = 60
 hittingTime = 3
@@ -224,6 +225,7 @@ while cap.isOpened():
             set_left()
             move()
             moving = 1
+            time.sleep(stareTime)
             nextTime = searchTime
 
         if result.boxes is not None:
