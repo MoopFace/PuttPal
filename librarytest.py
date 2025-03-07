@@ -21,7 +21,8 @@ if (HIT):
     MAX_SIZE = 1
 
     print("THE MODE IS ", GPIO.getmode())
-    
+    print("GPIO.BOARD IS ", GPIO.BOARD)
+
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(AIN1, GPIO.OUT)
     pwm = GPIO.PWM(AIN1, PWM_FREQ)
