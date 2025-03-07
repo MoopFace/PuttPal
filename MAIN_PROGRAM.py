@@ -36,7 +36,7 @@ def hit_sequence():
     f.move()
     #pwm.ChangeDutyCycle(dutyCycle)
     pwm.duty_cycle = dutyCycle
-    f.set_forward(speed
+    f.set_forward(speed)
     f.move()
     time.sleep(hittingTime)
     f.set_stop(speed)
