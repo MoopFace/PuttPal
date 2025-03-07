@@ -22,7 +22,7 @@ searchTime = 0.8
 stareTime = 0.1
 delay = 0
 hittingTime = 3
-strafeLeftTime = 1
+strafeLeftTime = 2
 strafeForwardTime = 1
 
 nextTime = 0
