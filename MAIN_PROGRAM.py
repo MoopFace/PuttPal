@@ -148,6 +148,7 @@ def move():
 
 def hit_sequence():
     print("HIT DA BALLS")
+    set_strafe_left()
     move()
     time.sleep(strafeLeftTime)
     set_stop()
