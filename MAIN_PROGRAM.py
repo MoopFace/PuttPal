@@ -60,8 +60,8 @@ prev_time = time.time()
 
 
 #stop moving when program starts
-set_stop()
-move()
+funcs.set_stop()
+funcs.move()
 nextTime = 0
 moving = 0
 
