@@ -1,5 +1,3 @@
-import cv2
-from ultralytics import YOLO
 import time
 import board
 #import Jetson.GPIO as GPIO

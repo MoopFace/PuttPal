@@ -1,7 +1,15 @@
+
+import time
+import cv2
+from ultralytics import YOLO
 import funcs
+
+
+
 #800 by 450
 
-
+kit = funcs.kit
+pwm = funcs.pwm
 
 
 
