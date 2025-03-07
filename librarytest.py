@@ -3,7 +3,7 @@ import Jetson.GPIO as GPIO
 from adafruit_motorkit import MotorKit
 import board
 
-HIT = False
+HIT = True
 
 #setup motorkit
 kit = MotorKit(i2c=board.I2C())
