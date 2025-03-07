@@ -55,7 +55,7 @@ kit.motor1.throttle=(0)
 
 if (NEW_HIT):
     print("new hit hitting")
-    pwm.duty_cycle = int(65535 * 0.8)
+    pwm.duty_cycle = int(65535 * 0.60)
     time.sleep(2)
     pwm.duty_cycle = 0
 
