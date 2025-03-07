@@ -5,6 +5,9 @@ import board
 
 HIT = True
 
+
+
+
 #setup motorkit
 kit = MotorKit(i2c=board.I2C())
 
@@ -21,6 +24,8 @@ if (HIT):
     GPIO.setup(AIN1, GPIO.OUT)
     pwm = GPIO.PWM(AIN1, PWM_FREQ)
     pwm.start(0)
+
+    print(GPIO.getmode())
 
     GPIO.output(AIN2, GPIO.LOW)
 
