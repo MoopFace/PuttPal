@@ -8,10 +8,12 @@ PWM_FREQ = 50
 
 MAX_SIZE = 1000
 MIN_SIZE = 1
-
+print("BEFORE SETTING MODE ", GPIO.getmode())
+print("SETTING MODE TO ", GPIO.BOARD)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(AIN1, GPIO.OUT)
 GPIO.setup(AIN2, GPIO.OUT)
+print("AFTER SETTING MODE ", GPIO.getmode())
 
 pwm = GPIO.PWM(AIN1, PWM_FREQ)
 pwm.start(0)
