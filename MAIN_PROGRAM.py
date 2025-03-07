@@ -32,14 +32,14 @@ def hit_sequence():
     f.set_strafe_left(speed)
     f.move()
     time.sleep(strafeLeftTime)
-    f.set_stop(speed)
+    f.set_stop()
     f.move()
     #pwm.ChangeDutyCycle(dutyCycle)
     pwm.duty_cycle = dutyCycle
     f.set_forward(speed)
     f.move()
     time.sleep(hittingTime)
-    f.set_stop(speed)
+    f.set_stop()
     f.move()
     #pwm.ChangeDutyCycle(0)
     pwm.duty_cycle = 0
