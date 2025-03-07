@@ -1,151 +1,23 @@
-import cv2
-from ultralytics import YOLO
-import time
-import board
-#import Jetson.GPIO as GPIO
-import digitalio
-import pwmio
-
+import funcs
 #800 by 450
 
 
-#import curses
-#import board
-#import digitalio
-#import busio
-#print("BUSSSSS")
-#import Jetson.GPIO as GPIO
 
 
 
-
-from adafruit_motorkit import MotorKit
-#i2c_bus = busio.I2C(board.SCL_1, board.SDA_1)
-#kit = MotorKit(i2c=i2c_bus, )
-#kit = MotorKit()
-#kit = MotorKit(i2c=busio.I2C(GP13_I2C2_CLK, GP14_I2C_DAT))
-#kit = MotorKit(i2c=busio.I2C(28, 27))
-
-kit = MotorKit(i2c=board.I2C())
-#3 and 2 are reversed
-#    kit.motor1.throttle=0.5
-#    kit.motor2.throttle=-0.5
-#    kit.motor3.throttle=-0.5
-#    kit.motor4.throttle=0.5
-    
-
-#def forward():
-#    kit.motor1.throttle=0.5
-#    kit.motor2.throttle=-0.5
-#    kit.motor3.throttle=-0.5
-#    kit.motor4.throttle=0.5
-
-
-#init ball hitter
-#AIN1 = 32
-#AIN2 = 33
-#PWM_FREQ = 50
-#
-#MAX_SIZE = 1000
-#MIN_SIZE = 1
-#
-#GPIO.setmode(GPIO.BOARD)
-#GPIO.setup(AIN1, GPIO.OUT)
-#GPIO.setup(AIN2, GPIO.OUT)
-#
-#pwm = GPIO.PWM(AIN1, PWM_FREQ)
-#pwm.start(0)
-#
-#GPIO.output(AIN2, GPIO.LOW)
-
-PWM_FREQ = 50
-directionPin = digitalio.DigitalInOut(board.D13) #should be pin 33 or D13
-directionPin.direction = digitalio.Direction.OUTPUT 
-directionPin.value = False
-
-pwm = pwmio.PWMOut(board.D12, frequency=PWM_FREQ, duty_cycle=0)
 
 dutyCycle = int(65535 * 0.8)
-
-
-
-
-
-
-
-M = [0, 0, 0, 0, 0]
 speed = 0.85
 turntime = 0.05 #0.05 works
 movetime = 0.1
 searchTime = 0.15
 stareTime = 0.1
 delay = 0
-#dutyCycle = 60
 hittingTime = 3
 strafeLeftTime = 1
 strafeForwardTime = 1
 
 nextTime = 0
-
-
-def set_forward():
-    M[1] += speed
-    M[2] += speed
-    M[3] += speed
-    M[4] += speed
-
-
-def set_backward():
-    M[1] += -speed
-    M[2] += -speed
-    M[3] += -speed
-    M[4] += -speed
-
-def set_right():
-    M[1] += -speed
-    M[2] += speed
-    M[3] += speed
-    M[4] += -speed
-
-
-def set_left():
-    M[1] += speed
-    M[2] += -speed
-    M[3] += -speed
-    M[4] += speed
-
-def set_strafe_right():
-    M[1] += speed
-    M[2] += -speed
-    M[3] += speed
-    M[4] += -speed
-
-def set_strafe_left():
-    M[1] += -speed
-    M[2] += speed
-    M[3] += -speed
-    M[4] += speed
-
-def set_stop():
-    M[1] = 0
-    M[2] = 0
-    M[3] = 0
-    M[4] = 0
-
-def norm(val):
-    if val > 1:
-        return 1
-    elif val < -1:
-        return -1
-    return val
-
-
-def move():
-    kit.motor1.throttle=norm(M[1])
-    kit.motor2.throttle=norm(-M[2])
-    kit.motor3.throttle=norm(-M[3])
-    kit.motor4.throttle=norm(M[4])
-
 
 def hit_sequence():
     print("HIT DA BALLS")
@@ -163,7 +35,9 @@ def hit_sequence():
     move()
     #pwm.ChangeDutyCycle(0)
     pwm.duty_cycle = 0
-   
+ 
+
+  
 
 # Load YOLOv11 model for golf ball detection
 model = YOLO('/home/jetson/PuttPal/best.pt', task="detect") # Change the path to the best.pt file
