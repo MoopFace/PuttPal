@@ -41,21 +41,31 @@ kit = MotorKit(i2c=board.I2C())
 
 
 #init ball hitter
-AIN1 = 32
-AIN2 = 33
+#AIN1 = 32
+#AIN2 = 33
+#PWM_FREQ = 50
+#
+#MAX_SIZE = 1000
+#MIN_SIZE = 1
+#
+#GPIO.setmode(GPIO.BOARD)
+#GPIO.setup(AIN1, GPIO.OUT)
+#GPIO.setup(AIN2, GPIO.OUT)
+#
+#pwm = GPIO.PWM(AIN1, PWM_FREQ)
+#pwm.start(0)
+#
+#GPIO.output(AIN2, GPIO.LOW)
+
 PWM_FREQ = 50
+directionPin = digitalio.DigitalInOut(board.D13) #should be pin 33 or D13
+directionPin.direction = digitalio.Direction.OUTPUT 
+directionPin.value = False
 
-MAX_SIZE = 1000
-MIN_SIZE = 1
+pwm = pwmio.PWMOut(board.D12, frequency=PWM_FREQ, duty_cycle=0)
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(AIN1, GPIO.OUT)
-GPIO.setup(AIN2, GPIO.OUT)
+dutyCycle = int(65535 * 0.8)
 
-pwm = GPIO.PWM(AIN1, PWM_FREQ)
-pwm.start(0)
-
-GPIO.output(AIN2, GPIO.LOW)
 
 
 
@@ -68,7 +78,7 @@ turntime = 0.05 #0.05 works
 movetime = 0.1
 searchTime = 0.15
 delay = 0
-dutyCycle = 60
+#dutyCycle = 60
 hittingTime = 3
 strafeLeftTime = 1
 strafeForwardTime = 1
@@ -134,13 +144,23 @@ def move():
     kit.motor3.throttle=norm(-M[3])
     kit.motor4.throttle=norm(M[4])
 
-#def timeMilis():
-#    return (time.time() * 1000)
 
-#def timeYet(deltaSeconds):
-#    return (time.time() - deltaSeconds) > lastTime
-
-
+def hit_sequence():
+    print("HIT DA BALLS")
+    move()
+    time.sleep(strafeLeftTime)
+    set_stop()
+    move()
+    #pwm.ChangeDutyCycle(dutyCycle)
+    pwm.duty_cycle = duty_cycle
+    set_forward()
+    move()
+    time.sleep(hittingTime)
+    set_stop()
+    move()
+    #pwm.ChangeDutyCycle(0)
+    pwm.duty_cycle = 0
+   
 
 # Load YOLOv11 model for golf ball detection
 model = YOLO('/home/jetson/PuttPal/best.pt', task="detect") # Change the path to the best.pt file
@@ -268,19 +288,7 @@ while cap.isOpened():
                                     moving = 1
 #                                    print("next time is ", nextTime, " movetime is", movetime, "moving is", moving)
                                 else:
-                                    set_strafe_left()
-                                    move()
-                                    time.sleep(strafeLeftTime)
-                                    set_stop()
-                                    move()
-                                    pwm.ChangeDutyCycle(dutyCycle)
-                                    set_forward()
-                                    move()
-                                    time.sleep(hittingTime)
-                                    set_stop()
-                                    move()
-                                    pwm.ChangeDutyCycle(0)
-
+                                    hit_sequence()
 
                         else:
                             print("not enough time has passed")
