@@ -2,19 +2,32 @@ import time
 import Jetson.GPIO as GPIO
 from adafruit_motorkit import MotorKit
 import board
+import pwmio
+import digitalio
 
-HIT = True
+
+OLD_HIT = True
+NEW_HIT = True
+
+if (NEW_HIT):
+    AIN1 = 32
+    AIN2 = 33
+    PWM_FREQ = 50
+    
+    directionPin = digitalio.DigitalInOut(board.D33) #should be pin 33 or D13
+    
+    directionPin.value = False
+    
+    pwm = pwmio.PWMOut(board.D32, frequency=PWM_FREQ, duty_cycle=0)
 
 
 
-if (HIT): 
+
+if (OLD_HIT): 
     #setup GPIO
     AIN1 = 32
     AIN2 = 33
     PWM_FREQ = 50
-
-    MAX_SIZE = 1000
-    MAX_SIZE = 1
 
     print("THE MODE IS ", GPIO.getmode())
     print("GPIO.BOARD IS ", GPIO.BOARD)
@@ -39,8 +52,13 @@ kit.motor1.throttle=(0.5)
 time.sleep(2)
 kit.motor1.throttle=(0)
 
+if (NEW_HIT):
+    pwm.duty_cycle = 80
+    time.sleep(2)
+    pwm.duty_cycle = 0
 
-if (HIT):
+
+if (OLD_HIT):
     #hitter swing
     pwm.ChangeDutyCycle(60)
     time.sleep(1)
