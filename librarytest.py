@@ -45,3 +45,6 @@ if (HIT):
     pwm.ChangeDutyCycle(60)
     time.sleep(1)
     pwm.ChangeDutyCycle(0)
+
+
+GPIO.cleanup()
