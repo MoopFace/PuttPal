@@ -108,7 +108,7 @@ while cap.isOpened():
 
     # Annotate detections on the frame
     for result in results:
-        if (len(result.boxes) == 0 && time.time() > nextTime):
+        if (len(result.boxes) == 0 and time.time() > nextTime):
             print("nothing detected, turning left")
             time.sleep(stareTime)
             f.set_left(speed)
