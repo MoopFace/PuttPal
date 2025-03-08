@@ -29,6 +29,12 @@ nextTime = 0
 
 def hit_sequence():
     print("HIT DA BALLS")
+    f.set_forward(speed)
+    f.move()
+    time.sleep(0.3)
+    f.set_stop()
+    f.move()
+
     f.set_strafe_left(speed)
     f.move()
     time.sleep(strafeLeftTime)
