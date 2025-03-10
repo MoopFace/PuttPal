@@ -59,7 +59,7 @@ model = YOLO('/home/jetson/PuttPal/best.pt', task="detect") # Change the path to
 # Open the webcam
 cap = cv2.VideoCapture(0)
 ###TESTING
-#cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
+cap.set(cv2.CAP_PROP_BUFFERSIZE, 5)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 800)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 600)
 
